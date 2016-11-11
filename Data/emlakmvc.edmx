@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="emlakmvc.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="emlakmvcStoreContainer">
+    <EntitySet Name="UserSet" EntityType="emlakmvc.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserTypeSet" EntityType="emlakmvc.Store.UserTypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IlanSet" EntityType="emlakmvc.Store.IlanSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IlanDetaySet" EntityType="emlakmvc.Store.IlanDetaySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogSet" EntityType="emlakmvc.Store.LogSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KategoriSet" EntityType="emlakmvc.Store.KategoriSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SikayetSet" EntityType="emlakmvc.Store.SikayetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Entity2Set" EntityType="emlakmvc.Store.Entity2Set" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserTypeUser" Association="emlakmvc.Store.UserTypeUser">
+      <End Role="UserType" EntitySet="UserTypeSet" />
+      <End Role="User" EntitySet="UserSet" />
+    </AssociationSet>
+    <AssociationSet Name="KategoriIlan" Association="emlakmvc.Store.KategoriIlan">
+      <End Role="Kategori" EntitySet="KategoriSet" />
+      <End Role="Ilan" EntitySet="IlanSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserSikayet" Association="emlakmvc.Store.UserSikayet">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Sikayet" EntitySet="SikayetSet" />
+    </AssociationSet>
+    <AssociationSet Name="IlanDetayIlan" Association="emlakmvc.Store.IlanDetayIlan">
+      <End Role="IlanDetay" EntitySet="IlanDetaySet" />
+      <End Role="Ilan" EntitySet="IlanSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserIlan" Association="emlakmvc.Store.UserIlan">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Ilan" EntitySet="IlanSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IlanSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fiyat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MetreKare" Type="int" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="KategoriId" Type="int" Nullable="false" />
+    <Property Name="IlanDetayId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IlanDetaySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OdaSayi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BanyoSayi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Isitma" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Esyalimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Aciklama" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KategoriSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAdi" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SikayetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Aciklama" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entity2Set">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="UserTypeUser">
+    <End Role="UserType" Type="emlakmvc.Store.UserTypeSet" Multiplicity="1" />
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KategoriIlan">
+    <End Role="Kategori" Type="emlakmvc.Store.KategoriSet" Multiplicity="1" />
+    <End Role="Ilan" Type="emlakmvc.Store.IlanSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ilan">
+        <PropertyRef Name="KategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserSikayet">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Sikayet" Type="emlakmvc.Store.SikayetSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sikayet">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IlanDetayIlan">
+    <End Role="IlanDetay" Type="emlakmvc.Store.IlanDetaySet" Multiplicity="1" />
+    <End Role="Ilan" Type="emlakmvc.Store.IlanSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IlanDetay">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ilan">
+        <PropertyRef Name="IlanDetayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserIlan">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Ilan" Type="emlakmvc.Store.IlanSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ilan">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="emlakmvc" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="emlakmvcContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="emlakmvc.User" />
+          <EntitySet Name="UserTypeSet" EntityType="emlakmvc.UserType" />
+          <EntitySet Name="IlanSet" EntityType="emlakmvc.Ilan" />
+          <EntitySet Name="IlanDetaySet" EntityType="emlakmvc.IlanDetay" />
+          <EntitySet Name="LogSet" EntityType="emlakmvc.Log" />
+          <EntitySet Name="KategoriSet" EntityType="emlakmvc.Kategori" />
+          <EntitySet Name="SikayetSet" EntityType="emlakmvc.Sikayet" />
+          <EntitySet Name="Entity2Set" EntityType="emlakmvc.Entity2" />
+          <AssociationSet Name="UserTypeUser" Association="emlakmvc.UserTypeUser">
+            <End Role="UserType" EntitySet="UserTypeSet" />
+            <End Role="User" EntitySet="UserSet" />
+          </AssociationSet>
+          <AssociationSet Name="KategoriIlan" Association="emlakmvc.KategoriIlan">
+            <End Role="Kategori" EntitySet="KategoriSet" />
+            <End Role="Ilan" EntitySet="IlanSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserSikayet" Association="emlakmvc.UserSikayet">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Sikayet" EntitySet="SikayetSet" />
+          </AssociationSet>
+          <AssociationSet Name="IlanDetayIlan" Association="emlakmvc.IlanDetayIlan">
+            <End Role="IlanDetay" EntitySet="IlanDetaySet" />
+            <End Role="Ilan" EntitySet="IlanSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserIlan" Association="emlakmvc.UserIlan">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Ilan" EntitySet="IlanSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Mail" Type="String" Nullable="false" />
+          <Property Name="Telefon" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserType" Relationship="emlakmvc.UserTypeUser" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="Sikayet" Relationship="emlakmvc.UserSikayet" FromRole="User" ToRole="Sikayet" />
+          <NavigationProperty Name="Ilan" Relationship="emlakmvc.UserIlan" FromRole="User" ToRole="Ilan" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserTypeUser" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Ilan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Fiyat" Type="String" Nullable="false" />
+          <Property Name="MetreKare" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Kategori" Relationship="emlakmvc.KategoriIlan" FromRole="Ilan" ToRole="Kategori" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="KategoriId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IlanDetay" Relationship="emlakmvc.IlanDetayIlan" FromRole="Ilan" ToRole="IlanDetay" />
+          <Property Name="IlanDetayId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserIlan" FromRole="Ilan" ToRole="User" />
+        </EntityType>
+        <EntityType Name="IlanDetay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kat" Type="String" Nullable="false" />
+          <Property Name="OdaSayi" Type="String" Nullable="false" />
+          <Property Name="BanyoSayi" Type="String" Nullable="false" />
+          <Property Name="Isitma" Type="String" Nullable="false" />
+          <Property Name="Esyalimi" Type="String" Nullable="false" />
+          <Property Name="Aciklama" Type="String" Nullable="false" />
+          <Property Name="Adres" Type="String" Nullable="false" />
+          <NavigationProperty Name="Ilan" Relationship="emlakmvc.IlanDetayIlan" FromRole="IlanDetay" ToRole="Ilan" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAdi" Type="String" Nullable="false" />
+          <NavigationProperty Name="Ilan" Relationship="emlakmvc.KategoriIlan" FromRole="Kategori" ToRole="Ilan" />
+        </EntityType>
+        <EntityType Name="Sikayet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" />
+          <Property Name="Aciklama" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserSikayet" FromRole="Sikayet" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entity2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="UserTypeUser">
+          <End Type="emlakmvc.UserType" Role="UserType" Multiplicity="1" />
+          <End Type="emlakmvc.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KategoriIlan">
+          <End Type="emlakmvc.Kategori" Role="Kategori" Multiplicity="1" />
+          <End Type="emlakmvc.Ilan" Role="Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSikayet">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Sikayet" Role="Sikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sikayet">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IlanDetayIlan">
+          <End Type="emlakmvc.IlanDetay" Role="IlanDetay" Multiplicity="1" />
+          <End Type="emlakmvc.Ilan" Role="Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IlanDetay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="IlanDetayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserIlan">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Ilan" Role="Ilan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ilan">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="emlakmvcStoreContainer" CdmEntityContainer="emlakmvcContainer">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.UserType)">
+        <MappingFragment StoreEntitySet="UserTypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IlanSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Ilan)">
+        <MappingFragment StoreEntitySet="IlanSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="MetreKare" ColumnName="MetreKare" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+          <ScalarProperty Name="IlanDetayId" ColumnName="IlanDetayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IlanDetaySet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.IlanDetay)">
+        <MappingFragment StoreEntitySet="IlanDetaySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Kat" ColumnName="Kat" />
+          <ScalarProperty Name="OdaSayi" ColumnName="OdaSayi" />
+          <ScalarProperty Name="BanyoSayi" ColumnName="BanyoSayi" />
+          <ScalarProperty Name="Isitma" ColumnName="Isitma" />
+          <ScalarProperty Name="Esyalimi" ColumnName="Esyalimi" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Log)">
+        <MappingFragment StoreEntitySet="LogSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KategoriSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Kategori)">
+        <MappingFragment StoreEntitySet="KategoriSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SikayetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Sikayet)">
+        <MappingFragment StoreEntitySet="SikayetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entity2Set">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Entity2)">
+        <MappingFragment StoreEntitySet="Entity2Set">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
