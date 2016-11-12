@@ -45,6 +45,7 @@
     <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="UserTypeSet">
     <Key>
@@ -215,6 +216,7 @@
           <NavigationProperty Name="UserType" Relationship="emlakmvc.UserTypeUser" FromRole="User" ToRole="UserType" />
           <NavigationProperty Name="Sikayet" Relationship="emlakmvc.UserSikayet" FromRole="User" ToRole="Sikayet" />
           <NavigationProperty Name="Ilan" Relationship="emlakmvc.UserIlan" FromRole="User" ToRole="Ilan" />
+          <Property Name="Avatar" Type="Binary" Nullable="true" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -360,6 +362,7 @@
           <ScalarProperty Name="Mail" ColumnName="Mail" />
           <ScalarProperty Name="Telefon" ColumnName="Telefon" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

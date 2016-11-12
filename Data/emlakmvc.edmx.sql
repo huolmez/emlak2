@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/11/2016 21:59:30
+-- Date Created: 11/12/2016 21:49:40
 -- Generated from EDMX file: C:\Users\husey\Desktop\EMLAK MVC\Emlak\Data\emlakmvc.edmx
 -- --------------------------------------------------
 
@@ -73,7 +73,8 @@ CREATE TABLE [dbo].[UserSet] (
     [Name] nvarchar(max)  NOT NULL,
     [Mail] nvarchar(max)  NOT NULL,
     [Telefon] nvarchar(max)  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL
+    [Password] nvarchar(max)  NOT NULL,
+    [Avatar] varbinary(max)  NULL
 );
 GO
 

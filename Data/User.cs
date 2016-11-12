@@ -26,6 +26,7 @@ namespace Data
         public string Mail { get; set; }
         public string Telefon { get; set; }
         public string Password { get; set; }
+        public byte[] Avatar { get; set; }
     
         public virtual UserType UserType { get; set; }
         public virtual ICollection<Sikayet> Sikayet { get; set; }
