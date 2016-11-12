@@ -12,7 +12,7 @@ using System.Drawing.Imaging;
 
 namespace Admin.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private emlakmvcContainer db = new emlakmvcContainer();
 
