@@ -10,108 +10,116 @@ using Data;
 
 namespace Admin.Controllers
 {
-    [ValidateInput(false)]
-    public class IlanDetaysController : BaseController
+    public class CommentsController : Controller
     {
         private emlakmvcContainer db = new emlakmvcContainer();
 
-        // GET: IlanDetays
+        // GET: Comments
         public ActionResult Index()
         {
-            return View(db.IlanDetaySet.ToList());
+            var commentSet = db.CommentSet.Include(c => c.User).Include(c => c.Ilan);
+            return View(commentSet.ToList());
         }
 
-        // GET: IlanDetays/Details/5
+        // GET: Comments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IlanDetay ilanDetay = db.IlanDetaySet.Find(id);
-            if (ilanDetay == null)
+            Comment comment = db.CommentSet.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(ilanDetay);
+            return View(comment);
         }
 
-        // GET: IlanDetays/Create
+        // GET: Comments/Create
         public ActionResult Create()
         {
+            ViewBag.UserId = new SelectList(db.UserSet, "Id", "Name");
+            ViewBag.IlanId = new SelectList(db.IlanSet, "Id", "Title");
             return View();
         }
 
-        // POST: IlanDetays/Create
+        // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Kat,OdaSayi,BanyoSayi,Isitma,Esyalimi,Aciklama,Adres")] IlanDetay ilanDetay)
+        public ActionResult Create([Bind(Include = "Id,UserId,IlanId,Text,Date,Verified")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.IlanDetaySet.Add(ilanDetay);
+                db.CommentSet.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(ilanDetay);
+            ViewBag.UserId = new SelectList(db.UserSet, "Id", "Name", comment.UserId);
+            ViewBag.IlanId = new SelectList(db.IlanSet, "Id", "Title", comment.IlanId);
+            return View(comment);
         }
 
-        // GET: IlanDetays/Edit/5
+        // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IlanDetay ilanDetay = db.IlanDetaySet.Find(id);
-            if (ilanDetay == null)
+            Comment comment = db.CommentSet.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(ilanDetay);
+            ViewBag.UserId = new SelectList(db.UserSet, "Id", "Name", comment.UserId);
+            ViewBag.IlanId = new SelectList(db.IlanSet, "Id", "Title", comment.IlanId);
+            return View(comment);
         }
 
-        // POST: IlanDetays/Edit/5
+        // POST: Comments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Kat,OdaSayi,BanyoSayi,Isitma,Esyalimi,Aciklama,Adres")] IlanDetay ilanDetay)
+        public ActionResult Edit([Bind(Include = "Id,UserId,IlanId,Text,Date,Verified")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ilanDetay).State = EntityState.Modified;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(ilanDetay);
+            ViewBag.UserId = new SelectList(db.UserSet, "Id", "Name", comment.UserId);
+            ViewBag.IlanId = new SelectList(db.IlanSet, "Id", "Title", comment.IlanId);
+            return View(comment);
         }
 
-        // GET: IlanDetays/Delete/5
+        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IlanDetay ilanDetay = db.IlanDetaySet.Find(id);
-            if (ilanDetay == null)
+            Comment comment = db.CommentSet.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(ilanDetay);
+            return View(comment);
         }
 
-        // POST: IlanDetays/Delete/5
+        // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IlanDetay ilanDetay = db.IlanDetaySet.Find(id);
-            db.IlanDetaySet.Remove(ilanDetay);
+            Comment comment = db.CommentSet.Find(id);
+            db.CommentSet.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

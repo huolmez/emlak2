@@ -13,7 +13,7 @@
     <EntitySet Name="LogSet" EntityType="emlakmvc.Store.LogSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KategoriSet" EntityType="emlakmvc.Store.KategoriSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SikayetSet" EntityType="emlakmvc.Store.SikayetSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Entity2Set" EntityType="emlakmvc.Store.Entity2Set" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommentSet" EntityType="emlakmvc.Store.CommentSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserTypeUser" Association="emlakmvc.Store.UserTypeUser">
       <End Role="UserType" EntitySet="UserTypeSet" />
       <End Role="User" EntitySet="UserSet" />
@@ -33,6 +33,14 @@
     <AssociationSet Name="UserIlan" Association="emlakmvc.Store.UserIlan">
       <End Role="User" EntitySet="UserSet" />
       <End Role="Ilan" EntitySet="IlanSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserComment" Association="emlakmvc.Store.UserComment">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Comment" EntitySet="CommentSet" />
+    </AssociationSet>
+    <AssociationSet Name="IlanComment" Association="emlakmvc.Store.IlanComment">
+      <End Role="Ilan" EntitySet="IlanSet" />
+      <End Role="Comment" EntitySet="CommentSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserSet">
@@ -103,11 +111,16 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Entity2Set">
+  <EntityType Name="CommentSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="IlanId" Type="int" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Verified" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="UserTypeUser">
     <End Role="UserType" Type="emlakmvc.Store.UserTypeSet" Multiplicity="1" />
@@ -169,6 +182,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserComment">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Comment" Type="emlakmvc.Store.CommentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IlanComment">
+    <End Role="Ilan" Type="emlakmvc.Store.IlanSet" Multiplicity="1" />
+    <End Role="Comment" Type="emlakmvc.Store.CommentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ilan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="IlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -181,7 +218,7 @@
           <EntitySet Name="LogSet" EntityType="emlakmvc.Log" />
           <EntitySet Name="KategoriSet" EntityType="emlakmvc.Kategori" />
           <EntitySet Name="SikayetSet" EntityType="emlakmvc.Sikayet" />
-          <EntitySet Name="Entity2Set" EntityType="emlakmvc.Entity2" />
+          <EntitySet Name="CommentSet" EntityType="emlakmvc.Comment" />
           <AssociationSet Name="UserTypeUser" Association="emlakmvc.UserTypeUser">
             <End Role="UserType" EntitySet="UserTypeSet" />
             <End Role="User" EntitySet="UserSet" />
@@ -202,6 +239,14 @@
             <End Role="User" EntitySet="UserSet" />
             <End Role="Ilan" EntitySet="IlanSet" />
           </AssociationSet>
+          <AssociationSet Name="UserComment" Association="emlakmvc.UserComment">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Comment" EntitySet="CommentSet" />
+          </AssociationSet>
+          <AssociationSet Name="IlanComment" Association="emlakmvc.IlanComment">
+            <End Role="Ilan" EntitySet="IlanSet" />
+            <End Role="Comment" EntitySet="CommentSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -217,6 +262,7 @@
           <NavigationProperty Name="Sikayet" Relationship="emlakmvc.UserSikayet" FromRole="User" ToRole="Sikayet" />
           <NavigationProperty Name="Ilan" Relationship="emlakmvc.UserIlan" FromRole="User" ToRole="Ilan" />
           <Property Name="Avatar" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="Comment" Relationship="emlakmvc.UserComment" FromRole="User" ToRole="Comment" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -241,6 +287,7 @@
           <NavigationProperty Name="IlanDetay" Relationship="emlakmvc.IlanDetayIlan" FromRole="Ilan" ToRole="IlanDetay" />
           <Property Name="IlanDetayId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="emlakmvc.UserIlan" FromRole="Ilan" ToRole="User" />
+          <NavigationProperty Name="Comment" Relationship="emlakmvc.IlanComment" FromRole="Ilan" ToRole="Comment" />
         </EntityType>
         <EntityType Name="IlanDetay">
           <Key>
@@ -281,11 +328,18 @@
           <NavigationProperty Name="User" Relationship="emlakmvc.UserSikayet" FromRole="Sikayet" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Entity2">
+        <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IlanId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Verified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserComment" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Ilan" Relationship="emlakmvc.IlanComment" FromRole="Comment" ToRole="Ilan" />
         </EntityType>
         <Association Name="UserTypeUser">
           <End Type="emlakmvc.UserType" Role="UserType" Multiplicity="1" />
@@ -344,6 +398,30 @@
             </Principal>
             <Dependent Role="Ilan">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserComment">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IlanComment">
+          <End Type="emlakmvc.Ilan" Role="Ilan" Multiplicity="1" />
+          <End Type="emlakmvc.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="IlanId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,10 +506,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Entity2Set">
-      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Entity2)">
-        <MappingFragment StoreEntitySet="Entity2Set">
+    <EntitySetMapping Name="CommentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Comment)">
+        <MappingFragment StoreEntitySet="CommentSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="IlanId" ColumnName="IlanId" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Verified" ColumnName="Verified" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

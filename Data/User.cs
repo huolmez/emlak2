@@ -18,6 +18,7 @@ namespace Data
         {
             this.Sikayet = new HashSet<Sikayet>();
             this.Ilan = new HashSet<Ilan>();
+            this.Comment = new HashSet<Comment>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,6 @@ namespace Data
         public virtual UserType UserType { get; set; }
         public virtual ICollection<Sikayet> Sikayet { get; set; }
         public virtual ICollection<Ilan> Ilan { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
     }
 }

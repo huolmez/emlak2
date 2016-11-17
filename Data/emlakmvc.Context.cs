@@ -32,6 +32,6 @@ namespace Data
         public virtual DbSet<Log> LogSet { get; set; }
         public virtual DbSet<Kategori> KategoriSet { get; set; }
         public virtual DbSet<Sikayet> SikayetSet { get; set; }
-        public virtual DbSet<Entity2> Entity2Set { get; set; }
+        public virtual DbSet<Comment> CommentSet { get; set; }
     }
 }

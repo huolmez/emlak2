@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/13/2016 00:59:44
+-- Date Created: 11/13/2016 18:38:30
 -- Generated from EDMX file: C:\Users\husey\Desktop\EMLAK MVC\Emlak\Data\emlakmvc.edmx
 -- --------------------------------------------------
 
@@ -134,9 +134,14 @@ CREATE TABLE [dbo].[SikayetSet] (
 );
 GO
 
--- Creating table 'Entity2Set'
-CREATE TABLE [dbo].[Entity2Set] (
-    [Id] int IDENTITY(1,1) NOT NULL
+-- Creating table 'CommentSet'
+CREATE TABLE [dbo].[CommentSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserId] int  NOT NULL,
+    [IlanId] int  NOT NULL,
+    [Text] nvarchar(max)  NOT NULL,
+    [Date] datetime  NOT NULL,
+    [Verified] bit  NOT NULL
 );
 GO
 
@@ -186,9 +191,9 @@ ADD CONSTRAINT [PK_SikayetSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Entity2Set'
-ALTER TABLE [dbo].[Entity2Set]
-ADD CONSTRAINT [PK_Entity2Set]
+-- Creating primary key on [Id] in table 'CommentSet'
+ALTER TABLE [dbo].[CommentSet]
+ADD CONSTRAINT [PK_CommentSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -269,6 +274,36 @@ GO
 CREATE INDEX [IX_FK_UserIlan]
 ON [dbo].[IlanSet]
     ([UserId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'CommentSet'
+ALTER TABLE [dbo].[CommentSet]
+ADD CONSTRAINT [FK_UserComment]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[UserSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserComment'
+CREATE INDEX [IX_FK_UserComment]
+ON [dbo].[CommentSet]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [IlanId] in table 'CommentSet'
+ALTER TABLE [dbo].[CommentSet]
+ADD CONSTRAINT [FK_IlanComment]
+    FOREIGN KEY ([IlanId])
+    REFERENCES [dbo].[IlanSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_IlanComment'
+CREATE INDEX [IX_FK_IlanComment]
+ON [dbo].[CommentSet]
+    ([IlanId]);
 GO
 
 -- --------------------------------------------------

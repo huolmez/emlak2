@@ -12,8 +12,16 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Entity2
+    public partial class Comment
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
+        public int IlanId { get; set; }
+        public string Text { get; set; }
+        public System.DateTime Date { get; set; }
+        public bool Verified { get; set; }
+    
+        public virtual User User { get; set; }
+        public virtual Ilan Ilan { get; set; }
     }
 }

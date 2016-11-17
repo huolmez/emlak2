@@ -14,6 +14,11 @@ namespace Data
     
     public partial class Ilan
     {
+        public Ilan()
+        {
+            this.Comment = new HashSet<Comment>();
+        }
+    
         public int Id { get; set; }
         public string Title { get; set; }
         public string Fiyat { get; set; }
@@ -26,5 +31,6 @@ namespace Data
         public virtual Kategori Kategori { get; set; }
         public virtual IlanDetay IlanDetay { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
     }
 }

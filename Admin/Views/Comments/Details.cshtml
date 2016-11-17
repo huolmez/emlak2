@@ -1,4 +1,4 @@
-﻿@model Data.Sikayet
+﻿@model Data.Comment
 
 @{
     ViewBag.Title = "Details";
@@ -7,23 +7,15 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Sikayetler</h4>
+    <h4>Comment</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Subject)
+            @Html.DisplayNameFor(model => model.Text)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Subject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Aciklama)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Aciklama)
+            @Html.DisplayFor(model => model.Text)
         </dd>
 
         <dt>
@@ -35,11 +27,27 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Verified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Verified)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.User.Name)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.User.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilan.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilan.Title)
         </dd>
 
     </dl>
