@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/13/2016 18:38:30
+-- Date Created: 11/18/2016 17:32:05
 -- Generated from EDMX file: C:\Users\husey\Desktop\EMLAK MVC\Emlak\Data\emlakmvc.edmx
 -- --------------------------------------------------
 
@@ -32,6 +32,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserIlan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[IlanSet] DROP CONSTRAINT [FK_UserIlan];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserComment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CommentSet] DROP CONSTRAINT [FK_UserComment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_IlanComment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CommentSet] DROP CONSTRAINT [FK_IlanComment];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -58,8 +64,8 @@ GO
 IF OBJECT_ID(N'[dbo].[SikayetSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[SikayetSet];
 GO
-IF OBJECT_ID(N'[dbo].[Entity2Set]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Entity2Set];
+IF OBJECT_ID(N'[dbo].[CommentSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CommentSet];
 GO
 
 -- --------------------------------------------------

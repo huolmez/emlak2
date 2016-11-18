@@ -10,7 +10,8 @@ using Data;
 
 namespace Admin.Controllers
 {
-    public class CommentsController : Controller
+    [ValidateInput(false)]
+    public class CommentsController : BaseController
     {
         private emlakmvcContainer db = new emlakmvcContainer();
 
