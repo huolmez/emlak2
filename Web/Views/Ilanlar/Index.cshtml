@@ -1,0 +1,21 @@
+﻿@model IQueryable<Data.Ilan>
+
+@{
+    ViewBag.Title = "Anasayfa";
+}
+
+<h2>Index</h2>
+@foreach (var ilan  in Model)
+{
+    <div class="row">
+        <h2>@ilan.IlanDetay.Aciklama</h2>
+        <div>
+            @Html.Raw(ilan.IlanDetay.Aciklama)
+        </div>
+        <div class="well posts-detail">
+            @Html.ActionLink("Devamını oku", "Show", "Posts", new { id = ilan.Id }, null) |
+           
+            <span class="glyphicon glyphicon-time"></span> @ilan.Tarih.ToString()
+        </div>
+    </div>
+}

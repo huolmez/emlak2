@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/18/2016 17:32:05
+-- Date Created: 11/18/2016 23:07:44
 -- Generated from EDMX file: C:\Users\husey\Desktop\EMLAK MVC\Emlak\Data\emlakmvc.edmx
 -- --------------------------------------------------
 
@@ -37,6 +37,9 @@ IF OBJECT_ID(N'[dbo].[FK_UserComment]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_IlanComment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CommentSet] DROP CONSTRAINT [FK_IlanComment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LogSet] DROP CONSTRAINT [FK_UserLog];
 GO
 
 -- --------------------------------------------------
@@ -119,7 +122,11 @@ GO
 
 -- Creating table 'LogSet'
 CREATE TABLE [dbo].[LogSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserId] int  NOT NULL,
+    [Subject] nvarchar(max)  NOT NULL,
+    [Detail] nvarchar(max)  NOT NULL,
+    [Date] datetime  NOT NULL
 );
 GO
 
@@ -310,6 +317,21 @@ GO
 CREATE INDEX [IX_FK_IlanComment]
 ON [dbo].[CommentSet]
     ([IlanId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'LogSet'
+ALTER TABLE [dbo].[LogSet]
+ADD CONSTRAINT [FK_UserLog]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[UserSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserLog'
+CREATE INDEX [IX_FK_UserLog]
+ON [dbo].[LogSet]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------

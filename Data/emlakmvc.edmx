@@ -42,6 +42,10 @@
       <End Role="Ilan" EntitySet="IlanSet" />
       <End Role="Comment" EntitySet="CommentSet" />
     </AssociationSet>
+    <AssociationSet Name="UserLog" Association="emlakmvc.Store.UserLog">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Log" EntitySet="LogSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserSet">
     <Key>
@@ -93,6 +97,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="KategoriSet">
     <Key>
@@ -206,6 +214,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserLog">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Log" Type="emlakmvc.Store.LogSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -247,6 +267,10 @@
             <End Role="Ilan" EntitySet="IlanSet" />
             <End Role="Comment" EntitySet="CommentSet" />
           </AssociationSet>
+          <AssociationSet Name="UserLog" Association="emlakmvc.UserLog">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Log" EntitySet="LogSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -263,6 +287,7 @@
           <NavigationProperty Name="Ilan" Relationship="emlakmvc.UserIlan" FromRole="User" ToRole="Ilan" />
           <Property Name="Avatar" Type="Binary" Nullable="true" />
           <NavigationProperty Name="Comment" Relationship="emlakmvc.UserComment" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Log" Relationship="emlakmvc.UserLog" FromRole="User" ToRole="Log" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -308,6 +333,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" />
+          <Property Name="Detail" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserLog" FromRole="Log" ToRole="User" />
         </EntityType>
         <EntityType Name="Kategori">
           <Key>
@@ -425,6 +455,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UserLog">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -484,6 +526,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Log)">
         <MappingFragment StoreEntitySet="LogSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
