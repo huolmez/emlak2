@@ -5,17 +5,24 @@
 }
 
 <h2>Index</h2>
-@foreach (var ilan  in Model)
+@foreach (var ilandetay  in Model)
 {
+    
     <div class="row">
-        <h2>@ilan.IlanDetay.Aciklama</h2>
+        <h2>@ilandetay.Title</h2>
         <div>
-            @Html.Raw(ilan.IlanDetay.Aciklama)
+            @Html.Raw(ilandetay.IlanDetay.Aciklama)
+            @Html.Raw(ilandetay.MetreKare)<b>m2</b>
+            <br />  
+            <b> @Html.Raw(ilandetay.Kategori.KategoriAdi)</b>
+            <br />
+            <b>Eklenme Tarihi: </b>@Html.Raw(ilandetay.Tarih)
         </div>
+
         <div class="well posts-detail">
-            @Html.ActionLink("Devamını oku", "Show", "Posts", new { id = ilan.Id }, null) |
            
-            <span class="glyphicon glyphicon-time"></span> @ilan.Tarih.ToString()
+            <span class="glyphicon glyphicon-time"></span> @ilandetay.Tarih.ToString()
+            
         </div>
     </div>
 }
