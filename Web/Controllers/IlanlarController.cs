@@ -32,5 +32,35 @@ namespace Web.Controllers
 
             return View(ilanlar);
         }
+        [HttpPost]
+        public ActionResult Comment(int post_id, String comment_text)
+        {
+            var user = (User)Session["user"];
+
+            if (user == null)
+            {
+                TempData["comment_error"] = "Giriş yapmadan yorum yapamasınız !";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+
+            if (comment_text == "" || post_id < 1)
+            {
+                TempData["comment_error"] = "Formdaki eksikleri doldurunuz !";
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+
+            var comment = new Comment();
+            comment.Date = DateTime.Now;
+            comment.IlanId = post_id;
+            comment.Text = comment_text;
+            comment.UserId = user.Id;
+            comment.Verified = false;
+
+            emlakmvc.CommentSet.Add(comment);
+            emlakmvc.SaveChanges();
+
+            TempData["comment_success"] = "Yorumunuz onay sonrasında yayına alınacaktır, teşekkürler !";
+            return Redirect(Request.UrlReferrer.ToString());
+        }
     }
 }
