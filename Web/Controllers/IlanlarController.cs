@@ -11,7 +11,7 @@ namespace Web.Controllers
     public class IlanlarController : BaseController
     {
         // GET: Ilanlar
-        public ActionResult Index(int id = 0, int start = 0, int pageSize = 10, string query = "")
+        public ActionResult Index(int id = 0, int start = 0, int pageSize = 1, string query = "")
         {
             var ilanlar = emlakmvc.IlanSet.AsQueryable();
 
@@ -31,7 +31,15 @@ namespace Web.Controllers
             ViewBag.pageSize = pageSize;
 
             return View(ilanlar);
+        
         }
+
+        public ActionResult Show(int id = 0)
+        {
+            Ilan ilan = emlakmvc.IlanSet.FirstOrDefault(q => q.Id == id);
+            return View(ilan);
+        }
+
         [HttpPost]
         public ActionResult Comment(int post_id, String comment_text)
         {

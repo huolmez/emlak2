@@ -25,8 +25,8 @@
             
         </div>
 
-        <div class="well posts-detail">
-           @Html.ActionLink("Devamını oku", "Ilanlar", new { id = ilandetay.Id }, null) |
+        <div class="well posts-detail alert-danger">
+           @Html.ActionLink("Daha fazlasını gör","Show", "Ilanlar", new { id = ilandetay.Id }, null) |
             @Html.ActionLink(ilandetay.Kategori.KategoriAdi, "Index", "Ilanlar", new { id = ilandetay.Kategori.Id }, null) |
             <b>@ilandetay.Comment.Count</b> Yorum |
             <b>Eklenme Tarihi: </b><span class="glyphicon glyphicon-time"></span> @ilandetay.Tarih.ToString()
@@ -35,3 +35,11 @@
         </div>
     </div>
 }
+<hr />
+<div class="row pull-right">
+    @Html.ActionLink("Sonraki sayfa", "Index",
+    new { start = ViewBag.start, pageSize = ViewBag.pageSize })
+</div>
+
+<hr />
+

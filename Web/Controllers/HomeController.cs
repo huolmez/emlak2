@@ -10,7 +10,7 @@ namespace Web.Controllers
     public class HomeController : BaseController
     {
         // GET: Home
-        public ActionResult Index(int start=0, int pageSize=10)
+        public ActionResult Index(int start=0, int pageSize=1)
         {
             var ilanlar = emlakmvc.IlanSet.OrderByDescending(q => q.Id).Skip(start).Take(pageSize);
 
