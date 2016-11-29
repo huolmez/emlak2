@@ -36,7 +36,7 @@
         <div class="well" id="form_standart">
             <span class="pull-right text-danger">Eski Usul</span>
             <h4>Yorum Yaz:</h4>
-            @using (Html.BeginForm("Comment", "Posts", FormMethod.Post))
+            @using (Html.BeginForm("Comment", "Ilanlar", FormMethod.Post))
             {
                 @Html.Hidden("post_id", Model.Id)
 
@@ -78,3 +78,32 @@
     {
         @Html.Partial("Comment", comment)
     }
+
+@section js {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+            function ShowMessage() {
+                $("#result").removeClass("hide");
+            }
+
+            $(function () {
+                $("#switch_ajax").click(function () {
+                    $("#form_standart").addClass("hide");
+                    $("#form_ajax").removeClass("hide");
+                });
+
+                $("#switch_standart").click(function () {
+                    $("#form_ajax").addClass("hide");
+                    $("#form_standart").removeClass("hide");
+                });
+
+                /*
+                $("#switch_ajax,#switch_standart").click(function () {
+
+                    $("#form_standart").toggleClass("hide");
+                    $("#form_ajax").toggleClass("hide");
+                });
+                 */
+            });
+    </script>
+}

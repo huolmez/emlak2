@@ -28,7 +28,7 @@ else
     <h4>Kategoriler</h4>
     <div>
         <ul class="list-unstyled">
-            @foreach (var item in HttpContext.Current.Application["categories"] as List<Data.Kategori>)
+            @foreach (var item in HttpContext.Current.Application["ilanlar"] as List<Data.Kategori>)
             {
                 <li>
                     <a href="@Url.Action("Index", new { id= item.Id })">@item.KategoriAdi</a>
