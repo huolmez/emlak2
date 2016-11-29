@@ -75,6 +75,7 @@
     <Property Name="Fiyat" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MetreKare" Type="int" Nullable="false" />
     <Property Name="Tarih" Type="datetime" Nullable="false" />
+    <Property Name="Resim" Type="varbinary(max)" Nullable="true" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="KategoriId" Type="int" Nullable="false" />
     <Property Name="IlanDetayId" Type="int" Nullable="false" />
@@ -307,6 +308,7 @@
           <Property Name="MetreKare" Type="Int32" Nullable="false" />
           <Property Name="Tarih" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Kategori" Relationship="emlakmvc.KategoriIlan" FromRole="Ilan" ToRole="Kategori" />
+          <Property Name="Resim" Type="Binary" Nullable="true" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="KategoriId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="IlanDetay" Relationship="emlakmvc.IlanDetayIlan" FromRole="Ilan" ToRole="IlanDetay" />
@@ -502,6 +504,7 @@
           <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
           <ScalarProperty Name="MetreKare" ColumnName="MetreKare" />
           <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Resim" ColumnName="Resim" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
           <ScalarProperty Name="IlanDetayId" ColumnName="IlanDetayId" />

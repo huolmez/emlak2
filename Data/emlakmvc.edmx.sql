@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/18/2016 23:07:44
+-- Date Created: 11/29/2016 11:27:03
 -- Generated from EDMX file: C:\Users\husey\Desktop\EMLAK MVC\Emlak\Data\emlakmvc.edmx
 -- --------------------------------------------------
 
@@ -101,6 +101,7 @@ CREATE TABLE [dbo].[IlanSet] (
     [Fiyat] nvarchar(max)  NOT NULL,
     [MetreKare] int  NOT NULL,
     [Tarih] datetime  NOT NULL,
+    [Resim] varbinary(max)  NULL,
     [UserId] int  NOT NULL,
     [KategoriId] int  NOT NULL,
     [IlanDetayId] int  NOT NULL

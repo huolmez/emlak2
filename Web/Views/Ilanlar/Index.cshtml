@@ -12,6 +12,8 @@
     <div class="row text-center">
         <p class="text-uppercase"> <h1>@ilandetay.Title</h1></p>
         <div>
+            <img src="@Url.Action("Resim",new{@resim = ilandetay.Resim})" width="100" />
+            
             <p class="text-center"> @Html.Raw(ilandetay.IlanDetay.Aciklama)</p>
             
                <p class="text-center"> @Html.Raw(ilandetay.MetreKare)<b>m2</b></p>

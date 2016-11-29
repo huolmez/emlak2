@@ -43,6 +43,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Resim)
+        </dt>
+
+        <dd>
+            <img src="@Url.Action("Avatar",new{@id = Model.Id})" />
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
         </dt>
 

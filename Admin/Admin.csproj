@@ -433,11 +433,6 @@
     <Content Include="Views\UserTypes\Details.cshtml" />
     <Content Include="Views\UserTypes\Edit.cshtml" />
     <Content Include="Views\UserTypes\Index.cshtml" />
-    <Content Include="Views\Ilans\Create.cshtml" />
-    <Content Include="Views\Ilans\Delete.cshtml" />
-    <Content Include="Views\Ilans\Details.cshtml" />
-    <Content Include="Views\Ilans\Edit.cshtml" />
-    <Content Include="Views\Ilans\Index.cshtml" />
     <Content Include="Views\IlanDetays\Create.cshtml" />
     <Content Include="Views\IlanDetays\Delete.cshtml" />
     <Content Include="Views\IlanDetays\Details.cshtml" />
@@ -475,6 +470,11 @@
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Ilans\Create.cshtml" />
+    <Content Include="Views\Ilans\Delete.cshtml" />
+    <Content Include="Views\Ilans\Details.cshtml" />
+    <Content Include="Views\Ilans\Edit.cshtml" />
+    <Content Include="Views\Ilans\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

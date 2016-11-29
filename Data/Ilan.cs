@@ -24,6 +24,7 @@ namespace Data
         public string Fiyat { get; set; }
         public int MetreKare { get; set; }
         public System.DateTime Tarih { get; set; }
+        public byte[] Resim { get; set; }
         public int UserId { get; set; }
         public int KategoriId { get; set; }
         public int IlanDetayId { get; set; }
