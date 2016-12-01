@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Helpers;
 
 
 namespace Web.Controllers
@@ -69,6 +70,16 @@ namespace Web.Controllers
 
             TempData["comment_success"] = "Yorumunuz onay sonrasında yayına alınacaktır, teşekkürler !";
             return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult Resim(int id)
+        {
+            byte[] file = emlakmvc.IlanSet.Find(id).Resim;
+            if (file == null)
+            {
+                return Content("Resim bulunamadı");
+            }
+            return File(file, ImageHelper.GetContentType(file).ToString());
         }
     }
 }

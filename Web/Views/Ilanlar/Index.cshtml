@@ -10,20 +10,24 @@
 {
     
     <div class="row text-center">
-        <p class="text-uppercase"> <h1>@ilandetay.Title</h1></p>
+        <div class="well">
+            <p class="text-uppercase"> <h1>@ilandetay.Title</h1></p>
+        </div>
         <div>
-            <img src="@Url.Action("Resim",new{@resim = ilandetay.Resim})" width="100" />
-            
-            <p class="text-center"> @Html.Raw(ilandetay.IlanDetay.Aciklama)</p>
-            
-               <p class="text-center"> @Html.Raw(ilandetay.MetreKare)<b>m2</b></p>
-           @*<br />*@
+            <div class="well " >
+                <img src="@Url.Action("Resim",new{@id = ilandetay.Id})" width="500" height="400" />
+
+            </div>
+                <p class="text-center"> @Html.Raw(ilandetay.IlanDetay.Aciklama)</p>
+
+                <p class="text-center"> @Html.Raw(ilandetay.MetreKare)<b>m2</b></p>
+                @*<br />*@
                 <p class="text-center"><b>Fiyat: </b>@Html.Raw(ilandetay.Fiyat)<b>TL</b></p>
-           @*<br />*@
+                @*<br />*@
                 <p class="text-center"><b>Kategori:  </b>@Html.Raw(ilandetay.Kategori.KategoriAdi)</p>
-           @*<br />*@
+                @*<br />*@
                 <p class="text-center"> <b>Ekleyen Kullanıcı: </b>@Html.Raw(ilandetay.User.Name)</p>
-           <br />
+                <br />
             
         </div>
 
