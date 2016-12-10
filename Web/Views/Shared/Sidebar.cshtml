@@ -1,7 +1,7 @@
 ﻿
 <div class="well">
     <h4>Arama</h4>
-    @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Ilanlar", FormMethod.Get))
     {
         <div class="input-group">
             <input type="text" name="query" value="@Request.QueryString["query"]" class="form-control">
@@ -25,13 +25,15 @@ else
 }
 
 <div class="well">
-    <h4>Kategoriler</h4>
-    <div>
+    <h4 class="text-center">Kategoriler</h4>
+    <div class="text-center">
         <ul class="list-unstyled">
             @foreach (var item in HttpContext.Current.Application["ilanlar"] as List<Data.Kategori>)
             {
                 <li>
-                    <a href="@Url.Action("Index", new { id= item.Id })">@item.KategoriAdi</a>
+                    <div class="well btn-link">
+                        <a href="@Url.Action("Index", new { id= item.Id })">@item.KategoriAdi</a>
+                    </div>
                 </li>
             }
         </ul>

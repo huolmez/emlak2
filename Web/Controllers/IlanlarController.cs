@@ -72,6 +72,26 @@ namespace Web.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        [HttpPost]
+        public ActionResult CommentAjax(int post_id, String comment_text)
+        {
+            Comment(post_id, comment_text);
+
+            if (TempData["comment_error"] != null)
+            {
+                return Content(TempData["comment_error"].ToString());
+            }
+            return Content(TempData["comment_success"].ToString());
+        }
+
+        public ActionResult Json(int id)
+        {
+            var list = emlakmvc.IlanSet.Where(q => q.KategoriId == id).Select(x => new { x.Id, x.Title });
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public ActionResult Resim(int id)
         {
             byte[] file = emlakmvc.IlanSet.Find(id).Resim;

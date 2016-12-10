@@ -26,7 +26,7 @@ namespace Web.Controllers
             {
                 var body = "<p>Gönderen: {0} ({1})</p><p>Konu: {2}</p><p>Mesaj:</p><p>{3}</p>";
                 var message = new MailMessage();
-                message.From = new MailAddress("olmezhuseyin7@gmail.com", "Blog E-Posta Servisi");
+                message.From = new MailAddress("emlakolmez@gmail.com", "Emlak & Gayrimenkul E-Posta Servisi");
                 message.To.Add(new MailAddress("olmezhuseyin7@gmail.com"));
                 message.Subject = "Yeni mesajınız var!";
                 message.Body = string.Format(body, model.FromName, model.FromEmail, model.Subject, model.Message);
@@ -38,8 +38,8 @@ namespace Web.Controllers
                     {
                         var credential = new NetworkCredential
                         {
-                            UserName = "epostaservisii@gmail.com",
-                            Password = "1qaz2wsx3EDC"
+                            UserName = "emlakolmez@gmail.com",
+                            Password = "huso142536"
                         };
                         smtp.Credentials = credential;
                         smtp.Host = "smtp.gmail.com";

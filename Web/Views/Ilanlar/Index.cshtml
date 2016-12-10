@@ -10,15 +10,16 @@
 {
     
     <div class="row text-center">
-        <div class="well">
+       
             <p class="text-uppercase"> <h1>@ilandetay.Title</h1></p>
-        </div>
+       <hr />
         <div>
-            <div class="well " >
-                <img src="@Url.Action("Resim",new{@id = ilandetay.Id})" width="500" height="400" />
-
+            <div style="text-align:center">
+                <img src="@Url.Action("Resim",new{@id = ilandetay.Id})" width="600" height="400" />
             </div>
-                <p class="text-center"> @Html.Raw(ilandetay.IlanDetay.Aciklama)</p>
+            <hr />
+            
+                @*<p class="text-center"> @Html.Raw(ilandetay.IlanDetay.Aciklama)</p>*@
 
                 <p class="text-center"> @Html.Raw(ilandetay.MetreKare)<b>m2</b></p>
                 @*<br />*@
@@ -48,4 +49,6 @@
 </div>
 
 <hr />
+
+<script language="javascript" src="http://is.sitekodlari.com/yukaricik1.js"></script>
 
