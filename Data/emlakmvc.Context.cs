@@ -33,5 +33,9 @@ namespace Data
         public virtual DbSet<Kategori> KategoriSet { get; set; }
         public virtual DbSet<Sikayet> SikayetSet { get; set; }
         public virtual DbSet<Comment> CommentSet { get; set; }
+        public virtual DbSet<Cart> CartSet { get; set; }
+        public virtual DbSet<Payment> PaymentSet { get; set; }
+        public virtual DbSet<ProjectAccess> ProjectAccessSet { get; set; }
+        public virtual DbSet<Project> ProjectSet { get; set; }
     }
 }

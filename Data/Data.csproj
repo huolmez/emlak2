@@ -144,6 +144,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cart.cs">
+      <DependentUpon>emlakmvc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CartStatus.cs">
+      <DependentUpon>emlakmvc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Comment.cs">
       <DependentUpon>emlakmvc.tt</DependentUpon>
     </Compile>
@@ -172,6 +178,15 @@
       <DependentUpon>emlakmvc.tt</DependentUpon>
     </Compile>
     <Compile Include="Log.cs">
+      <DependentUpon>emlakmvc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>emlakmvc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs">
+      <DependentUpon>emlakmvc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectAccess.cs">
       <DependentUpon>emlakmvc.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

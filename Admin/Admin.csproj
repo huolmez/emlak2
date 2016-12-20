@@ -414,6 +414,9 @@
     <Compile Include="Controllers\IlansController.cs" />
     <Compile Include="Controllers\KategorisController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
+    <Compile Include="Controllers\ProjectAccessesController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SikayetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
@@ -478,6 +481,21 @@
     <Content Include="Views\Ilans\Index.cshtml" />
     <Content Include="Views\Logs\Index.cshtml" />
     <Content Include="Views\Logs\Details.cshtml" />
+    <Content Include="Views\Payments\Create.cshtml" />
+    <Content Include="Views\Payments\Delete.cshtml" />
+    <Content Include="Views\Payments\Details.cshtml" />
+    <Content Include="Views\Payments\Edit.cshtml" />
+    <Content Include="Views\Payments\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\ProjectAccesses\Create.cshtml" />
+    <Content Include="Views\ProjectAccesses\Delete.cshtml" />
+    <Content Include="Views\ProjectAccesses\Details.cshtml" />
+    <Content Include="Views\ProjectAccesses\Edit.cshtml" />
+    <Content Include="Views\ProjectAccesses\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

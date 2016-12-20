@@ -8,10 +8,10 @@ namespace Web.ViewModel
 {
     public class CreditViewModel
     {
-         [Required, Display(Name= "Kart Sahibi")]
+        [Required, Display(Name = "Kart Sahibi")]
         public string Holder { get; set; }
 
-        [Required, Display(Name="Numara"), StringLength(4)]
+        [Required, Display(Name = "Numara"), StringLength(4)]
         public string Number1 { get; set; }
 
         [Required, Display(Name = "Numara"), StringLength(4)]
@@ -29,8 +29,7 @@ namespace Web.ViewModel
         [Required, Display(Name = "Son Kullanma Tarihi"), StringLength(2)]
         public string Year { get; set; }
 
-        [Required, Display(Name="Güvenlik Kodu"), StringLength(3)]
+        [Required, Display(Name = "Güvenlik Kodu"), StringLength(3)]
         public string CVC { get; set; }
     }
-    
 }

@@ -14,6 +14,10 @@
     <EntitySet Name="KategoriSet" EntityType="emlakmvc.Store.KategoriSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SikayetSet" EntityType="emlakmvc.Store.SikayetSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CommentSet" EntityType="emlakmvc.Store.CommentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CartSet" EntityType="emlakmvc.Store.CartSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaymentSet" EntityType="emlakmvc.Store.PaymentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectAccessSet" EntityType="emlakmvc.Store.ProjectAccessSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectSet" EntityType="emlakmvc.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserTypeUser" Association="emlakmvc.Store.UserTypeUser">
       <End Role="UserType" EntitySet="UserTypeSet" />
       <End Role="User" EntitySet="UserSet" />
@@ -45,6 +49,34 @@
     <AssociationSet Name="UserLog" Association="emlakmvc.Store.UserLog">
       <End Role="User" EntitySet="UserSet" />
       <End Role="Log" EntitySet="LogSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserProject" Association="emlakmvc.Store.UserProject">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Project" EntitySet="ProjectSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserProjectAccess" Association="emlakmvc.Store.UserProjectAccess">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectProjectAccess" Association="emlakmvc.Store.ProjectProjectAccess">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserCart" Association="emlakmvc.Store.UserCart">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Cart" EntitySet="CartSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectCart" Association="emlakmvc.Store.ProjectCart">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Cart" EntitySet="CartSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserPayment" Association="emlakmvc.Store.UserPayment">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Payment" EntitySet="PaymentSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectAccessPayment" Association="emlakmvc.Store.ProjectAccessPayment">
+      <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
+      <End Role="Payment" EntitySet="PaymentSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserSet">
@@ -130,6 +162,47 @@
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Verified" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CartSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaymentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ProjectAccess_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectAccessSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="File" Type="varbinary(max)" Nullable="true" />
+    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContentType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
   <Association Name="UserTypeUser">
     <End Role="UserType" Type="emlakmvc.Store.UserTypeSet" Multiplicity="1" />
@@ -227,6 +300,90 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserProject">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Project" Type="emlakmvc.Store.ProjectSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProjectAccess">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="ProjectAccess" Type="emlakmvc.Store.ProjectAccessSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectAccess">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectProjectAccess">
+    <End Role="Project" Type="emlakmvc.Store.ProjectSet" Multiplicity="1" />
+    <End Role="ProjectAccess" Type="emlakmvc.Store.ProjectAccessSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectAccess">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserCart">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Cart" Type="emlakmvc.Store.CartSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectCart">
+    <End Role="Project" Type="emlakmvc.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Cart" Type="emlakmvc.Store.CartSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserPayment">
+    <End Role="User" Type="emlakmvc.Store.UserSet" Multiplicity="1" />
+    <End Role="Payment" Type="emlakmvc.Store.PaymentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectAccessPayment">
+    <End Role="ProjectAccess" Type="emlakmvc.Store.ProjectAccessSet" Multiplicity="1" />
+    <End Role="Payment" Type="emlakmvc.Store.PaymentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectAccess">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ProjectAccess_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -272,6 +429,38 @@
             <End Role="User" EntitySet="UserSet" />
             <End Role="Log" EntitySet="LogSet" />
           </AssociationSet>
+          <EntitySet Name="CartSet" EntityType="emlakmvc.Cart" />
+          <EntitySet Name="PaymentSet" EntityType="emlakmvc.Payment" />
+          <EntitySet Name="ProjectAccessSet" EntityType="emlakmvc.ProjectAccess" />
+          <EntitySet Name="ProjectSet" EntityType="emlakmvc.Project" />
+          <AssociationSet Name="UserProject" Association="emlakmvc.UserProject">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Project" EntitySet="ProjectSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserProjectAccess" Association="emlakmvc.UserProjectAccess">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectProjectAccess" Association="emlakmvc.ProjectProjectAccess">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserCart" Association="emlakmvc.UserCart">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Cart" EntitySet="CartSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectCart" Association="emlakmvc.ProjectCart">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="Cart" EntitySet="CartSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserPayment" Association="emlakmvc.UserPayment">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Payment" EntitySet="PaymentSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectAccessPayment" Association="emlakmvc.ProjectAccessPayment">
+            <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
+            <End Role="Payment" EntitySet="PaymentSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -289,6 +478,10 @@
           <Property Name="Avatar" Type="Binary" Nullable="true" />
           <NavigationProperty Name="Comment" Relationship="emlakmvc.UserComment" FromRole="User" ToRole="Comment" />
           <NavigationProperty Name="Log" Relationship="emlakmvc.UserLog" FromRole="User" ToRole="Log" />
+          <NavigationProperty Name="Project" Relationship="emlakmvc.UserProject" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="ProjectAccess" Relationship="emlakmvc.UserProjectAccess" FromRole="User" ToRole="ProjectAccess" />
+          <NavigationProperty Name="Cart" Relationship="emlakmvc.UserCart" FromRole="User" ToRole="Cart" />
+          <NavigationProperty Name="Payment" Relationship="emlakmvc.UserPayment" FromRole="User" ToRole="Payment" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -469,6 +662,137 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="emlakmvc.CartStatus" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserCart" FromRole="Cart" ToRole="User" />
+          <NavigationProperty Name="Project" Relationship="emlakmvc.ProjectCart" FromRole="Cart" ToRole="Project" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserPayment" FromRole="Payment" ToRole="User" />
+          <NavigationProperty Name="ProjectAccess" Relationship="emlakmvc.ProjectAccessPayment" FromRole="Payment" ToRole="ProjectAccess" />
+        </EntityType>
+        <EntityType Name="ProjectAccess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserProjectAccess" FromRole="ProjectAccess" ToRole="User" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="emlakmvc.ProjectProjectAccess" FromRole="ProjectAccess" ToRole="Project" />
+          <NavigationProperty Name="Payment" Relationship="emlakmvc.ProjectAccessPayment" FromRole="ProjectAccess" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="File" Type="Binary" Nullable="true" />
+          <Property Name="FileName" Type="String" Nullable="false" />
+          <Property Name="ContentType" Type="String" Nullable="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="User" Relationship="emlakmvc.UserProject" FromRole="Project" ToRole="User" />
+          <NavigationProperty Name="ProjectAccess" Relationship="emlakmvc.ProjectProjectAccess" FromRole="Project" ToRole="ProjectAccess" />
+          <NavigationProperty Name="Cart" Relationship="emlakmvc.ProjectCart" FromRole="Project" ToRole="Cart" />
+        </EntityType>
+        <Association Name="UserProject">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProjectAccess">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.ProjectAccess" Role="ProjectAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectAccess">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectProjectAccess">
+          <End Type="emlakmvc.Project" Role="Project" Multiplicity="1" />
+          <End Type="emlakmvc.ProjectAccess" Role="ProjectAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectAccess">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserCart">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectCart">
+          <End Type="emlakmvc.Project" Role="Project" Multiplicity="1" />
+          <End Type="emlakmvc.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPayment">
+          <End Type="emlakmvc.User" Role="User" Multiplicity="1" />
+          <End Type="emlakmvc.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="CartStatus">
+          <Member Name="New" Value="0" />
+          <Member Name="Paid" Value="1" />
+          <Member Name="Canceled" Value="2" />
+        </EnumType>
+        <Association Name="ProjectAccessPayment">
+          <End Type="emlakmvc.ProjectAccess" Role="ProjectAccess" Multiplicity="1" />
+          <End Type="emlakmvc.Payment" Role="Payment" Multiplicity="0..1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -567,6 +891,58 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CartSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Cart)">
+        <MappingFragment StoreEntitySet="CartSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Payment)">
+        <MappingFragment StoreEntitySet="PaymentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAccessSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.ProjectAccess)">
+        <MappingFragment StoreEntitySet="ProjectAccessSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectSet">
+      <EntityTypeMapping TypeName="IsTypeOf(emlakmvc.Project)">
+        <MappingFragment StoreEntitySet="ProjectSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProjectAccessPayment" TypeName="emlakmvc.ProjectAccessPayment" StoreEntitySet="PaymentSet">
+      <EndProperty Name="ProjectAccess">
+        <ScalarProperty Name="Id" ColumnName="ProjectAccess_Id" />
+      </EndProperty>
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

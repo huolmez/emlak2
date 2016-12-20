@@ -20,6 +20,10 @@ namespace Data
             this.Ilan = new HashSet<Ilan>();
             this.Comment = new HashSet<Comment>();
             this.Log = new HashSet<Log>();
+            this.Project = new HashSet<Project>();
+            this.ProjectAccess = new HashSet<ProjectAccess>();
+            this.Cart = new HashSet<Cart>();
+            this.Payment = new HashSet<Payment>();
         }
     
         public int Id { get; set; }
@@ -35,5 +39,9 @@ namespace Data
         public virtual ICollection<Ilan> Ilan { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<Log> Log { get; set; }
+        public virtual ICollection<Project> Project { get; set; }
+        public virtual ICollection<ProjectAccess> ProjectAccess { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }

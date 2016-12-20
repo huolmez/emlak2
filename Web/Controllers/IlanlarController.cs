@@ -92,6 +92,17 @@ namespace Web.Controllers
 
 
 
+        //public ActionResult Resim(int id)
+        //{
+        //    User user = emlakmvc.UserSet.Find(id);
+
+        //    if (user == null)
+        //    {
+        //        return Content("Resim bulunamadı");
+        //    }
+        //    byte[] file = user.Avatar;
+        //    return File(file, ImageHelper.GetContentType(file).ToString());
+        //}
         public ActionResult Resim(int id)
         {
             byte[] file = emlakmvc.IlanSet.Find(id).Resim;
@@ -102,4 +113,4 @@ namespace Web.Controllers
             return File(file, ImageHelper.GetContentType(file).ToString());
         }
     }
-}
+    }

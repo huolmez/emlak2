@@ -11,13 +11,22 @@ namespace Web.Controllers
 {
     public class UserController : BaseController
     {
+
+        public ActionResult LoginForm(UserViewModel user)
+        {
+            if (Session["user"] == null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Ilanlar");
+        }
+
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                emlakmvcContainer db = new emlakmvcContainer();
-                User found = db.UserSet.FirstOrDefault(r => r.Mail == user.Email && r.Password == user.Password);
+                User found = emlakmvc.UserSet.FirstOrDefault(r => r.Mail == user.Email && r.Password == user.Password);
                 if (found != null)
                 {
                     Session["user"] = found;
@@ -29,6 +38,11 @@ namespace Web.Controllers
             else
             {
                 TempData["error"] = "Eksik form alanı bıraktınız...";
+            }
+
+            if (Request == null)
+            {
+                return View("LoginForm");
             }
 
             return Redirect(Request.UrlReferrer.ToString());
@@ -51,6 +65,5 @@ namespace Web.Controllers
             }
             return File(file, ImageHelper.GetContentType(file).ToString());
         }
-
     }
 }
